@@ -19,8 +19,19 @@ namespace Guia_Practica.Controllers
 
         public IActionResult Get()
         {
-            List<equipos> listadoEquipo = (from e in _equiposContexto.equipos
-                                           select e).ToList();
+            var listadoEquipo = (from e in _equiposContexto.equipos
+                                 join m in _equiposContexto.marcas on e.marca_id equals m.id_marcas
+                                 join te in _equiposContexto.tipo_equipo on e.tipo_equipo_id equals te.id_tipo_equipo
+                                 select new
+                                 {
+                                     e.id_equipos,
+                                     e.nombre,
+                                     e.tipo_equipo_id,
+                                     tipo_descripcion = te.descripcion,
+                                     e.marca_id,
+                                     m.nombre_marca
+                                 }
+                                 ).ToList();
 
             if (listadoEquipo.Count == 0)
             {

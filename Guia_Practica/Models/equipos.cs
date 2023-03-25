@@ -6,8 +6,8 @@ namespace Guia_Practica.Models
     {
         [Key]
         public int id_equipos { get; set; }
-        public string nombre { get; set; }
-        public string descripcion { get; set; }
+        public string? nombre { get; set; }
+        public string? descripcion { get; set; }
         public int? tipo_equipo_id { get; set; }
         public int? marca_id { get; set; }
         public string modelo { get; set; }
